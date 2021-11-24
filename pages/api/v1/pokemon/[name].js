@@ -3,9 +3,8 @@ import {db} from '../../../../lib/db';
 export default async function handler(req, res) {
 
     if (req.method === 'GET') {
-        console.log('---- pokemon ---- ')
         //Fetch the ${pageNumber} pokemons limit to 20 rows 
-        const {rows:pokemons} = await db.query(`SELECT * FROM salesforce.pokemon__c WHERE name = ${req.param.name}`) 
+        const {rows:pokemons} = await db.query(`SELECT * FROM salesforce.pokemon__c WHERE name = '${req.query.name}'`); 
         
         //Fetch the pokemons types and weaknesses
         const pokemonId = pokemons.map(pokemon => pokemon.sfid);
@@ -34,7 +33,6 @@ export default async function handler(req, res) {
                 weaknesses: pokemonWeakness[pokemon.sfid]
             }
         })
-        console.log('pokemons => ',pokemonResult);
         res.status(200).json(pokemonResult[0]);
     } else {
         // Handle any other HTTP method

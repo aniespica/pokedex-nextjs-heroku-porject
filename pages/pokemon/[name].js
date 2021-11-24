@@ -5,13 +5,10 @@ import { request } from '../../lib/request'
 
 export default function Pokemon({ pokemon }) {
     
-    return
-    console.log('pokemon => ',pokemon);
-
     return (
         <>
             <div className={PokeCss.contenedor}>
-                <div className={`${PokeCss.Info} ${pokemon.types[0].name}`}>
+                <div className={`${PokeCss.Info} ${pokemon.types[0].name.toLowerCase()}`}>
                     <div className={PokeCss.navegacion}>
                         <Link scroll={false} href={{
                             pathname: '/',
@@ -32,7 +29,7 @@ export default function Pokemon({ pokemon }) {
                     </div>
                     <div className={PokeCss.nombre}>
                         <h1>{pokemon.name}</h1>
-                        <span>#00{pokemon.id}</span>
+                        <span>#{parseInt(pokemon.pokedex_number__c,10)}</span>
                     </div>
                     <div className={PokeCss.tipos}>
                         {pokemon.types.map(type => (

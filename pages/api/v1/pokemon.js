@@ -34,6 +34,7 @@ export default async function handler(req, res) {
                 weaknesses: pokemonWeakness[pokemon.sfid]
             }
         })
+        
         res.status(200).json(pokemonResult);
     } else {
         // Handle any other HTTP method
